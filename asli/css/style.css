@@ -1,0 +1,525 @@
+:root {
+  --primary: #b6895b;
+  --bg: #010101;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* berguna ketika kita memberi style untuk form/button */
+  outline: none;
+  /* end */
+  /* agar kita punya kendali atas border */
+  border: none;
+  /* end */
+  /* agar tidak ada garis bawahnya ketika membuat link */
+  text-decoration: none;
+}
+
+/* agar scroll kita smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: #fff;
+  /* min-height: 6000px; */
+}
+
+/* navbar */
+.navbar {
+  /* agar mampu mengatur ketiga sub navbar dengan simpel*/
+  display: flex;
+  /* agar jarak antar elemennya sama (horizon) */
+  justify-content: space-between;
+  /* agar jarak antar elemennya sama (vertical) */
+  align-items: center;
+  /* 1.4rem = relatif thd 16px dan font size tdk didefinisikan, 7% = agar responsive */
+  padding: 1.4rem 7%;
+  /* tadinya warna :root berubah jadi rgb */
+  background-color: rgba(1, 1, 1, 0.8);
+  border-bottom: 1px solid #513c28;
+  /* agar navbarnya nggk hilang ketika di scroll */
+  position: fixed;
+  /* agar navbar penuh ketarik ke atas, kiri dan kanan */
+  top: 0;
+  left: 0;
+  right: 0;
+  /* agar navbarnya tidak tertindih */
+  z-index: 9999;
+}
+
+/* logo kiri*/
+.navbar .navbar-logo {
+  font-size: 2rem;
+  /* karena ukuran font tadi telah saya set 700 untuk bold */
+  font-weight: 700;
+  color: #fff;
+  font-style: italic;
+}
+
+/* logo kanan */
+.navbar .navbar-logo span {
+  color: var(--primary);
+}
+
+/* nav */
+.navbar .navbar-nav a {
+  color: #fff;
+  /* untuk membuat a dapat diberi margin, jika inline = tdk bisa margin, jika block = margin turun kebawah walaupun bisa diberi margin */
+  display: inline-block;
+  font-size: 1.3rem;
+  margin: 0 1rem;
+}
+
+/* ketika di hover warna link berubah */
+.navbar .navbar-nav a:hover {
+  color: var(--primary);
+}
+
+/* animasi garis bawah ketika a di hover */
+.navbar .navbar-nav a::after {
+  /* agar bisa kita atur dimensinya */
+  content: '';
+  /*  */
+  display: block;
+  padding-bottom: 0.5rem;
+  /* kita ingin membuat border bottom responsive */
+  border-bottom: 0.1rem solid var(--primary);
+  /* ini urutan saya ingin membuat border bottom(bb) muncul ketika saya hover */
+  /* 1.jadikan bb kecil bgt sampek tdk terlihat */
+  transform: scaleX(0);
+  /* 3.kasih transisi agar lebih keren, linier=supaya tidak ising */
+  transition: 0.2s linear;
+}
+
+/* 2.kita hover bb baru muncul */
+.navbar .navbar-nav a:hover::after {
+  transform: scaleX(0.5);
+}
+/* end membuat border bottom(bb) muncul ketika saya hover*/
+
+/* extra */
+.navbar .navbar-extra a {
+  color: #fff;
+  margin: 0 0.5rem;
+}
+
+/* ketika di hover warna link berubah */
+.navbar .navbar-extra a:hover {
+  color: var(--primary);
+}
+
+/* menyimpan hamburger menu untuk digunakan saat versi android  */
+#hamburger-menu {
+  display: none;
+}
+
+/* bagian hero */
+.hero {
+  /* agar gambar penuh satu layar */
+  min-height: 100vh;
+  /* agar content nya di tengah hero secara vertical */
+  display: flex;
+  /* agar tulisannya ditengah" */
+  align-items: center;
+  /* end vertical */
+  background-image: url("../img/header-bg.png");
+  background-repeat: no-repeat;
+  /* agar ukuran penuh 1 layar */
+  background-size: cover;
+  /* agar gambarnya ditengah" */
+  background-position: center;
+  /* ini langkah 2 dari line 144 */
+  position: relative;
+}
+/* pseudo element agar hero ngebland dengan baris bawahnya*/
+.hero::after {
+  /* agar bisa diberi style */
+  content: '';
+  display: block;
+  /* mau saya beri position absolute biar nempel kebawah tapi ada tambahan "relative" di .hero*/
+  position: absolute;
+  width: 100%;
+  /* tadinya 100% karena tombol jadi 30% */
+  height: 30%;
+  /* agar garis bland turun kebawah */
+  bottom: 0;
+  /*  */
+  /* tadinya 3% jadi 8%, 25% jadi 50% (supaya transisinya naik) */
+  background: linear-gradient(
+    0deg,
+    rgba(1, 1, 3, 1) 8%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+/* bagian content */
+.hero .content {
+  padding: 1.4rem 7%;
+  /* agar tidak terlalu panjang */
+  max-width: 60rem;
+}
+
+.hero .content h1 {
+  font-size: 5rem;
+  color: #fff;
+  /* ku beri bayangan */
+  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+  /* kecilin jarak baris 1 dengan baris berikutnya */
+  line-height: 1.2;
+}
+
+.hero .content h1 span {
+  color: var(--primary);
+}
+
+.hero .content p {
+  /* biar agak besar */
+  font-size: 1.6rem;
+  /* supaya tipis */
+  font-weight: 100;
+  /* agar tidak terlalu mepet dengan yang atas*/
+  margin-top: 1rem;
+  /* jarak baris 1 dengan baris berikutnya */
+  line-height: 1.4;
+  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+  /* saya kasih mix-bland mode agar warna yang sama berbanding terbalik dengan warna yang ditimpanya(cth:gelas) */
+  mix-blend-mode: difference;
+}
+
+.hero .content .cta {
+  /* supaya agak gede */
+  font-size: 1.4rem;
+  color: #fff;
+  margin-top: 1rem;
+  /* agar bisa diberi margin dan padding */
+  display: inline-block;
+  padding: 1rem 3rem;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+}
+
+/* about section */
+.about, 
+/* karena stylenya akan sama */
+.menu,
+.contact {
+  /* agar ketika link about dipencet tulisan tentang kami tidak tenggelam di balik navbar, pilih padding jangan margin */
+  padding: 8rem 7% 1.4rem;
+}
+
+.about h2,
+/* karena stylenya akan sama */
+.menu h2,
+.contact h2 {
+  /*  */
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+}
+
+.about h2 span, 
+/* karena stylenya akan sama */
+.menu h2 span,
+.contact h2 span {
+  color: var(--primary);
+}
+
+/*gambar dan content about section */
+.about .row {
+  /* supaya ngaturnya gampang */
+  display: flex;
+}
+
+.about .row .about-img {
+  /* flex-grow, flex-shrink, flex-basis */
+  /* bisa untuk kedua belah pihak */
+  flex: 1 1 45rem;
+}
+
+.about .row .about-img img {
+  /* untuk gambarnya */
+  width: 100%;
+}
+
+.about .row .content {
+  /* agak lebih kecil */
+  flex: 1 1 35rem;
+  padding: 0 1rem;
+}
+
+.about .row .content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about .row .content p {
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  /* agar lebih tipis dari sebenarnya */
+  font-weight: 100;
+  line-height: 1.6;
+}
+
+/* menu section */
+.menu h2,
+.contact h2 {
+  margin-bottom: 1rem;
+}
+
+.menu p,
+.contact p {
+  /* supaya ditengah */
+  text-align: center;
+  /* mengurangi lebar tulisan */
+  max-width: 30rem;
+  /* agar ditengah */
+  margin: auto;
+  font-weight: 100;
+  line-height: 1.6;
+}
+
+.menu .row {
+  display: flex;
+  /* kalau kebanyakan supaya langsung turun kebawah, supaya tidak perlu ngatur resposivenya lagi*/
+  flex-wrap: wrap;
+  /* agar tidak terlalu nempel ke atas */
+  margin-top: 5rem;
+  /* agar mulai dari tengah */
+  justify-content: center;
+}
+
+.menu .row .menu-card {
+  /* agar semua text dibikin center */
+  text-align: center;
+  /* agar menu-card antar atas dengan bawah ada jaraknya */
+  padding-bottom: 4rem;
+}
+.menu .row .menu-card img {
+  border-radius: 50%;
+  /* agar nggk gede" amat */
+  width: 70%;
+}
+
+.menu .row .menu-card .menu-card-tittle {
+  margin-top: 1.5rem;
+}
+
+/* contact section */
+.contact .row {
+  /* supaya ngatur ngatur map dan formnya gampang */
+  display: flex;
+  margin-top: 2rem;
+  background-color: #222;
+  /* jika dibuka diperangkat lebih kecil akan turun kebawah */
+  /* untuk nanti ketika responsive */
+  /* flex-wrap: wrap; */
+}
+
+.contact .row .map {
+  flex: 1 1 45rem;
+  /* supaya petamya penuh */
+  width: 100%;
+  object-fit: cover;
+}
+
+.contact .row form {
+  flex: 1 1 45rem;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.contact .row form .input-group {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: var(--bg);
+  border: 1px solid #eee;
+  padding-left: 2rem;
+}
+
+.contact .row form .input-group input {
+  width: 100%;
+  padding: 2rem;
+  font-size: 1.7rem;
+  background: none;
+  color: #fff;
+}
+
+.contact .row form .btn {
+  margin-top: 3rem;
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: 1.7rem;
+  color: #fff;
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+
+/* footer */
+footer {
+  background-color: var(--primary);
+  /* untuk semua tulisannya */
+  text-align: center;
+  padding: 1rem 0 3rem;
+  margin-top: 3rem;
+}
+
+footer .socials {
+  padding: 1rem 0;
+}
+
+footer .socials a {
+  color: #fff;
+  margin: 1rem;
+}
+
+footer .socials a:hover,
+footer .links a:hover {
+  color: var(--bg);
+}
+
+footer .links {
+  margin-bottom: 1.4rem;
+
+}
+
+
+footer .links a {
+  color: #fff;
+  padding: 0.7rem 1rem;
+}
+
+footer .creadit {
+  font-size: 0.8rem;
+}
+
+footer .credit a {
+  color: var(--bg);
+  font-weight: 700;
+}
+
+
+
+/* kita mulai membuat fitur responsive layar disini */
+/* media queries */
+/* 1920px = desktop */
+
+
+/* laptop */
+@media (max-width: 1366px) {
+  /* umtuk menurunkan font size desktopnya */
+  html {
+    font-size: 75%;
+  }
+}
+
+/* tablet */
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+  /* memunculkan kembali hamburger menu di lebar layar tablet */
+  #hamburger-menu {
+    display: inline-block;
+  }
+
+  /* mengilangkan .nav tanpa display: none; */
+  .navbar .navbar-nav {
+    /* supaya enak mindahin tanpa mengganggu element lain */
+    position: absolute;
+    /* agar nempel ke atas */
+    top: 100%;
+    /* jika 0 = nav berada di kanan, tapi kalau (-) nav berada di luar kanan tak terlihat*/
+    right: -100%;
+    background-color: #fff;
+    width: 30rem;
+    /* agar tingginya penuh satu layar thd nav */
+    height: 100vh;
+    /* agar togglenya smooth */
+    transition: 0.3s;
+  }
+
+  /* jika navbar-nav ada class .active, maka right = 0 (bantuan js (line:48 html)) */
+  .navbar .navbar-nav.active {
+    right: 0;
+  }
+
+  /* untuk link a dalam side bar*/
+  .navbar .navbar-nav a {
+    color: var(--bg);
+    /* agar elementnya turun kebawah */
+    display: block;
+    margin: 1.5rem;
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+
+  /* menggeser garis bawah nav a ke kiri agar sebaris dengan tulisan nav */
+  .navbar .navbar-nav a::after {
+    /* sumbu x lalu y, menggeser ke kiri */
+    transform-origin: 0 0;
+  }
+
+  .navbar .navbar-nav a:hover::after {
+    /* tadinya o.5, sekarang saya bikin 0.2 */
+    transform: scaleX(0.2);
+  }
+
+  .about .row {
+    /* agar turun kebawah */
+    flex-wrap: wrap;
+  }
+
+  /* agar ukuran gambarnya tingginya berkurang */
+  .about .row .about-img img {
+    height: 24rem;
+    /* agar gambar tidak ketarik ketika di responsive */
+    object-fit: cover;
+    /* agar gambar posisinya pas ditengah" */
+    object-position: center;
+  }
+
+  /* mengilangkan paddingnya agar penuh sejajar dengan gambar*/
+  .about .row .content {
+    padding: 0;
+  }
+
+  /* agar h3 tidak terlalu mepet dengan gambar */
+  .about .row .content h3 {
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+
+  .about .row .content p {
+    font-size: 1.6rem;
+  }
+
+  .menu p {
+    font-size: 1.2rem;
+  }
+
+  .contact .row {
+    flex-wrap: wrap;
+  }
+  .contact .row .map {
+    height: 30rem;
+  }
+
+  .contact .row form {
+    padding-top: 0;
+  }
+}
+
+/* mobile phone */
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+}
